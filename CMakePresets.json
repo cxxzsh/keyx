@@ -1,0 +1,35 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja Multi-Config",
+      "binaryDir": "${sourceDir}/ninja-build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_CONFIGURATION_TYPES": "Debug;Release"
+      },
+      "warnings": {
+        "uninitialized": true
+      }
+    },
+    {
+      "name": "dev",
+      "inherits": "base",
+      "cacheVariables": {
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "dev-debug",
+      "configurePreset": "dev",
+      "configuration": "Debug"
+    },
+    {
+      "name": "dev-release",
+      "configurePreset": "dev",
+      "configuration": "Release"
+    }
+  ]
+}
