@@ -1,4 +1,0 @@
-# All files
-[*]
-guidelines = 80
-guidelines_style = 3px solid ff9933

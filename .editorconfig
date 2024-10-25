@@ -1,0 +1,4 @@
+# All files
+[*]
+guidelines = 80, 120
+guidelines_style = 1px solid 000000

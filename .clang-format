@@ -21,7 +21,7 @@ CommentPragmas: "suppress"
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 Cpp11BracedListStyle: false
 FixNamespaceComments: false
-IncludeBlocks: Regroup
+IncludeBlocks: Preserve
 IncludeCategories:
     - Regex: '^.*(precomp|pch|stdafx)'
       Priority: -1
@@ -37,7 +37,7 @@ MacroBlockEnd: "END_TEST_METHOD_PROPERTIES|END_MODULE|END_TEST_CLASS|END_TEST_ME
 NamespaceIndentation: All
 PointerAlignment: Left
 ReflowComments: false
-SortIncludes: false
+SortIncludes: true
 SpaceAfterTemplateKeyword: false
 SpacesInAngles: false
 SpacesInContainerLiterals: false
