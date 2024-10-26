@@ -21,4 +21,7 @@ FetchContent_MakeAvailable(nlohmann_json)
 
 find_package(OpenSSL REQUIRED)
 
+include_directories(${CMAKE_SOURCE_DIR})
+
 add_subdirectory(keyx)
+

@@ -13,21 +13,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#include <iostream>
-
-#include "openssl/err.h"
-#include "openssl/ssl.h"
-
-#include "keyx/key.h"
-
-int main() {
-  SSL_library_init();
-  OpenSSL_add_all_algorithms();
-  SSL_load_error_strings();
-
-  std::cout << "OpenSSL initialized successfully!" << std::endl;
-
-  EVP_cleanup();
-  return 0;
-}
+ 
+ #include "keyx/license/license.h"

@@ -14,20 +14,16 @@
  * limitations under the License.
  */
 
-#include <iostream>
+#pragma once
 
-#include "openssl/err.h"
-#include "openssl/ssl.h"
+#include "keyx/global.h"
 
-#include "keyx/key.h"
+namespace keyx {
 
-int main() {
-  SSL_library_init();
-  OpenSSL_add_all_algorithms();
-  SSL_load_error_strings();
+class Key {
+ public:
+  virtual bool load(const sfs::path& src_path) = 0;
+  virtual bool save(const sfs::path& dst_path) = 0;
+};
 
-  std::cout << "OpenSSL initialized successfully!" << std::endl;
-
-  EVP_cleanup();
-  return 0;
-}
+}  // namespace keyx
