@@ -16,8 +16,17 @@
 
 #pragma once
 
+#include <string>
+#include <vector>
+
 namespace keyx {
 namespace crypto {
-class Base64 {};
+
+class Base64 {
+ public:
+  static std::string Encode(std::string_view raw);
+  static std::string Decode(std::string_view encoded);
+};
+
 }  // namespace crypto
 }  // namespace keyx

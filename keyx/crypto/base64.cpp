@@ -15,3 +15,50 @@
  */
 
 #include "keyx/crypto/base64.h"
+
+#include <vector>
+
+#include "openssl/bio.h"
+#include "openssl/buffer.h"
+#include "openssl/evp.h"
+
+namespace keyx {
+namespace crypto {
+
+std::string Base64::Encode(std::string_view raw) {
+  BIO* bio = BIO_new(BIO_f_base64());
+  BIO* bmem = BIO_new(BIO_s_mem());
+  bio = BIO_push(bio, bmem);
+
+  BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL);
+  BIO_write(bio, raw.data(), static_cast<int>(raw.length()));
+  BIO_flush(bio);
+
+  BUF_MEM* buffer = nullptr;
+  BIO_get_mem_ptr(bio, &buffer);
+  std::string output(buffer->data, buffer->length);
+
+  BIO_free_all(bio);
+
+  return output;
+}
+
+std::string Base64::Decode(std::string_view encoded) {
+  BIO* bio = BIO_new(BIO_f_base64());
+  BIO* bmem = BIO_new_mem_buf(encoded.data(), -1);
+
+  bio = BIO_push(bio, bmem);
+
+  BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL);
+
+  std::vector<char> buffer(encoded.length());
+  int decoded_length =
+      BIO_read(bio, buffer.data(), static_cast<int>(encoded.length()));
+
+  BIO_free_all(bio);
+
+  return std::string{buffer.begin(), buffer.end()};
+}
+
+}  // namespace crypto
+}  // namespace keyx
