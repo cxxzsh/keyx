@@ -287,5 +287,5 @@ profiles.json
 # MSBuildCache
 /MSBuildCacheLogs/
 
-
 *ninja*
+*build*

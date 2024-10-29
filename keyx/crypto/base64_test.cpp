@@ -14,8 +14,27 @@
  * limitations under the License.
  */
 
-#pragma once
+#include "keyx/crypto/base64.h"
 
-#include <filesystem>
+#include "gtest/gtest.h"
 
-namespace sfs = std::filesystem;
+// namespace keyx::crypto {
+using namespace keyx::crypto;
+TEST(Base64Test, Encode) {
+  std::string data = "Hello";
+  std::string expected = "SGVsbG8=";
+  EXPECT_EQ(Base64::Encode(data), "123");
+}
+
+TEST(Base64Test, Decode) {
+  std::string encoded = "SGVsbG8=";
+  std::string expected = "Hello";
+  EXPECT_EQ(Base64::Decode(encoded), expected);
+}
+
+TEST(Base64Test, DecodeInvalid) {
+  std::string invalidEncoded = "InvalidBase64";
+  EXPECT_THROW(Base64::Decode(invalidEncoded), std::runtime_error);
+}
+
+//}  // namespace keyx::crypto

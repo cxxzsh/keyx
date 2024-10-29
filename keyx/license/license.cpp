@@ -14,4 +14,6 @@
  * limitations under the License.
  */
  
- #include "keyx/license/license.h"
+ #include "keyx/license.h"
+
+bool keyx::license::License::Verify() { return false; }

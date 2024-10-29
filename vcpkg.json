@@ -1,0 +1,7 @@
+{
+  "dependencies": [
+    "gtest",
+    "openssl",
+    "nlohmann-json"
+  ]
+}

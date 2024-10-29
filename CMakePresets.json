@@ -7,7 +7,8 @@
       "generator": "Ninja Multi-Config",
       "binaryDir": "${sourceDir}/ninja-build/${presetName}",
       "cacheVariables": {
-        "CMAKE_CONFIGURATION_TYPES": "Debug;Release"
+        "CMAKE_CONFIGURATION_TYPES": "Debug;Release",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
       },
       "warnings": {
         "uninitialized": true
@@ -17,6 +18,7 @@
       "name": "dev",
       "inherits": "base",
       "cacheVariables": {
+        "KEYX_BUILD_TESTS": true
       }
     }
   ],
@@ -30,6 +32,15 @@
       "name": "dev-release",
       "configurePreset": "dev",
       "configuration": "Release"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "dev-default",
+      "configurePreset": "dev",
+      "execution": {
+        "jobs": 4
+      }
     }
   ]
 }
