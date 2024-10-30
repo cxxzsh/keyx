@@ -7,7 +7,7 @@
       "generator": "Ninja Multi-Config",
       "binaryDir": "${sourceDir}/ninja-build/${presetName}",
       "cacheVariables": {
-        "CMAKE_CONFIGURATION_TYPES": "Debug;Release",
+        "CMAKE_CONFIGURATION_TYPES": "Debug;Release"
       },
       "warnings": {
         "uninitialized": true
