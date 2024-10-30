@@ -25,6 +25,8 @@
 namespace keyx {
 namespace crypto {
 
+constexpr const char* kEmptyString = "";
+
 std::string Base64::Encode(std::string_view raw) {
   BIO* bio = BIO_new(BIO_f_base64());
   BIO* bmem = BIO_new(BIO_s_mem());
@@ -51,11 +53,17 @@ std::string Base64::Decode(std::string_view encoded) {
 
   BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL);
 
-  std::vector<char> buffer(encoded.length());
+  size_t output_length = (encoded.size() * 3) / 4 + 1;
+
+  std::vector<char> buffer(output_length);
   int decoded_length =
-      BIO_read(bio, buffer.data(), static_cast<int>(encoded.length()));
+      BIO_read(bio, buffer.data(), static_cast<int>(output_length));
 
   BIO_free_all(bio);
+
+  if (decoded_length <= 0) {
+    return kEmptyString;
+  }
 
   return std::string{buffer.begin(), buffer.end()};
 }

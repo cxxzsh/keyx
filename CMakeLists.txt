@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.21)
 
 project(keyx VERSION 1.0.0 LANGUAGES CXX)
 
@@ -45,7 +45,6 @@ set(keyx_library_SOURCES
     "keyx/signature/signature.cpp"
 )
 
-
 add_library(${LIB_NAME}
     ${keyx_library_HEADERS}
     ${keyx_library_SOURCES}
@@ -74,11 +73,9 @@ add_executable(${TEST_TARGET_NAME}
 
 target_link_libraries(${TEST_TARGET_NAME}
     PRIVATE
-    ${LIB_NAME} 
-    GTest::gtest 
+    GTest::gtest    
     GTest::gtest_main
-    GTest::gmock 
-    GTest::gmock_main
+    ${LIB_NAME} 
 )
 
 include(GoogleTest)

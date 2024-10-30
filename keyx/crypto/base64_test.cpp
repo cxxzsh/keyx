@@ -18,23 +18,38 @@
 
 #include "gtest/gtest.h"
 
-// namespace keyx::crypto {
-using namespace keyx::crypto;
+namespace keyx::crypto {
+
 TEST(Base64Test, Encode) {
-  std::string data = "Hello";
-  std::string expected = "SGVsbG8=";
-  EXPECT_EQ(Base64::Encode(data), "123");
+  constexpr std::string_view data = "Hello";
+  constexpr std::string_view expected = "SGVsbG8=";
+  EXPECT_EQ(Base64::Encode(data), expected);
 }
 
 TEST(Base64Test, Decode) {
-  std::string encoded = "SGVsbG8=";
-  std::string expected = "Hello";
+  constexpr std::string_view encoded = "SGVsbG8=";
+  constexpr std::string_view expected = "Hello";
   EXPECT_EQ(Base64::Decode(encoded), expected);
 }
 
 TEST(Base64Test, DecodeInvalid) {
-  std::string invalidEncoded = "InvalidBase64";
-  EXPECT_THROW(Base64::Decode(invalidEncoded), std::runtime_error);
+  // Test various invalid inputs
+  struct TestCase {
+    std::string input;
+    const char* description;
+  };
+
+  std::vector<TestCase> test_cases = {{"Invalid!", "Invalid characters"},
+                                     {"ABC", "Length not multiple of 4"},
+                                     {"A===", "Too many padding characters"},
+                                     {"====", "All padding characters"},
+                                     {"AB=A", "Invalid padding position"}};
+
+  for (const auto& tc : test_cases) {
+    // Provide better error information
+    SCOPED_TRACE(tc.description);  
+    EXPECT_EQ(Base64::Decode(tc.input), "");
+  }
 }
 
-//}  // namespace keyx::crypto
+}  // namespace keyx::crypto

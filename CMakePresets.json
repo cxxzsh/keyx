@@ -1,46 +1,76 @@
 {
-  "version": 3,
-  "configurePresets": [
-    {
-      "name": "base",
-      "hidden": true,
-      "generator": "Ninja Multi-Config",
-      "binaryDir": "${sourceDir}/ninja-build/${presetName}",
-      "cacheVariables": {
-        "CMAKE_CONFIGURATION_TYPES": "Debug;Release",
-        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
-      },
-      "warnings": {
-        "uninitialized": true
-      }
+    "version": 8,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 21,
+        "patch": 0
     },
-    {
-      "name": "dev",
-      "inherits": "base",
-      "cacheVariables": {
-        "KEYX_BUILD_TESTS": true
-      }
-    }
-  ],
-  "buildPresets": [
-    {
-      "name": "dev-debug",
-      "configurePreset": "dev",
-      "configuration": "Debug"
-    },
-    {
-      "name": "dev-release",
-      "configurePreset": "dev",
-      "configuration": "Release"
-    }
-  ],
-  "testPresets": [
-    {
-      "name": "dev-default",
-      "configurePreset": "dev",
-      "execution": {
-        "jobs": 4
-      }
-    }
-  ]
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "displayName": "Ninja Multi-Config",
+            "description": "Configure with vcpkg toolchain and generate Ninja project files for all configurations",
+            "generator": "Ninja Multi-Config",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "toolchainFile": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+            "warnings": {
+                "uninitialized": true
+            }
+        },
+        {
+            "name": "dev",
+            "inherits": "base",
+            "cacheVariables": {
+                "KEYX_BUILD_TESTS": true
+            }
+        },
+        {
+            "name": "dev",
+            "displayName": "使用工具链文件配置预设",
+            "description": "设置 Ninja 生成器、版本和安装目录",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_TOOLCHAIN_FILE": "",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "dev-debug",
+            "configurePreset": "dev",
+            "configuration": "Debug"
+        },
+        {
+            "name": "dev-release",
+            "configurePreset": "dev",
+            "configuration": "Release"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "test-dev",
+            "configurePreset": "dev",
+            "hidden": true
+        },
+        {
+            "name": "test-dev-debug",
+            "displayName": "test-dev-debug",
+            "configuration": "Debug",
+            "inherits": [
+                "test-dev"
+            ]
+        },
+        {
+            "name": "test-dev-release",
+            "displayName": "test-dev-release",
+            "configuration": "Release",
+            "inherits": [
+                "test-dev"
+            ]
+        }
+    ]
 }
