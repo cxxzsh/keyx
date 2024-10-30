@@ -46,7 +46,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    
+    # Install latest CMake and Ninja.
+    - uses: lukka/get-cmake@latest
+    # Or pin to a specific CMake version:
+    # lukka/get-cmake@v3.27
 
+    # Setup vcpkg: ensures vcpkg is downloaded and built.
+    # Since vcpkg.json is being used later on to install the packages
+    # when `run-cmake` runs, no packages are installed at this time
+    # (and vcpkg does not run).
+    - name: Setup anew (or from cache) vcpkg (and does not build any package)
+      uses: lukka/run-vcpkg@v11 # Always specify the specific _version_ of the
+                                  # action you need, `v11` in this case to stay up
+                                  # to date with fixes on the v11 branch.    
+                                  
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
       id: strings
