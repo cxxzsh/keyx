@@ -8,7 +8,6 @@
       "binaryDir": "${sourceDir}/ninja-build/${presetName}",
       "cacheVariables": {
         "CMAKE_CONFIGURATION_TYPES": "Debug;Release",
-        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
       },
       "warnings": {
         "uninitialized": true
