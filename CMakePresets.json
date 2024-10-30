@@ -12,12 +12,9 @@
             "description": "Configure with vcpkg toolchain and generate Ninja project files for all configurations",
             "generator": "Ninja Multi-Config",
             "binaryDir": "${sourceDir}/build/${presetName}",
-            "toolchainFile": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
-            "warnings": {
-                "uninitialized": true
-            },           
+            "toolchainFile": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",    
             "cacheVariables": {
-                "KEYX_BUILD_TESTS": true
+                "KEYX_BUILD_TESTS": "ON"
             }
         }
     ],
