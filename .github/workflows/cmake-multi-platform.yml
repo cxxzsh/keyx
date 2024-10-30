@@ -30,12 +30,15 @@ jobs:
           - os: windows-latest
             c_compiler: cl
             cpp_compiler: cl
+            vcpkgCommitId: '1b63f25c4cd58a699df0beb39474e62b2efc14a1'
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
+            vcpkgCommitId: '1b63f25c4cd58a699df0beb39474e62b2efc14a1'
           - os: ubuntu-latest
             c_compiler: clang
             cpp_compiler: clang++
+            vcpkgCommitId: '1b63f25c4cd58a699df0beb39474e62b2efc14a1'
         exclude:
           - os: windows-latest
             c_compiler: gcc
@@ -60,6 +63,7 @@ jobs:
       uses: lukka/run-vcpkg@v11 # Always specify the specific _version_ of the
                                   # action you need, `v11` in this case to stay up
                                   # to date with fixes on the v11 branch.    
+                                  
     - name: Run CMake consuming CMakePreset.json and run vcpkg to build packages
       uses: lukka/run-cmake@v10
       with:
