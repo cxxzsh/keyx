@@ -38,7 +38,7 @@ std::string Base64::Encode(std::string_view raw) {
 
   BUF_MEM* buffer = nullptr;
   BIO_get_mem_ptr(bio, &buffer);
-  std::string output(buffer->data, buffer->length);
+  std::string output{buffer->data, buffer->length};
 
   BIO_free_all(bio);
 
@@ -65,7 +65,7 @@ std::string Base64::Decode(std::string_view encoded) {
     return kEmptyString;
   }
 
-  return std::string{buffer.begin(), buffer.end()};
+  return std::string{buffer.begin(), buffer.begin() + decoded_length};
 }
 
 }  // namespace crypto
