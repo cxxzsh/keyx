@@ -7,7 +7,7 @@
     },
     "configurePresets": [
         {
-            "name": "base",
+            "name": "dev",
             "hidden": true,
             "displayName": "Ninja Multi-Config",
             "description": "Configure with vcpkg toolchain and generate Ninja project files for all configurations",
@@ -16,12 +16,7 @@
             "toolchainFile": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
             "warnings": {
                 "uninitialized": true
-            }
-        },
-        {
-            "name": "dev",
-            "inherits": "base",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            },           
             "cacheVariables": {
                 "KEYX_BUILD_TESTS": true
             }
