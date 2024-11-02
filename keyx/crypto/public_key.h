@@ -15,12 +15,37 @@
  */
 #pragma once
 
-#include "keyx/key.h"
+#include <span>
+
+#include "keyx/crypto/key.h"
 
 namespace keyx {
 namespace crypto {
 
-class PublicKey : public Key {};
+class PublicKey : public Key {
+ public:
+  DISABLE_COPY_AND_ASSIGN(PublicKey)
+
+  PublicKey() = default;
+  ~PublicKey() noexcept override = default;
+
+  PublicKey(PublicKey&& other) noexcept;
+  PublicKey& operator=(PublicKey&& other) noexcept;
+
+  bool LoadFromFile(const fs::path& file) override;
+  bool SaveToFile(const fs::path& file) override;
+
+  bool LoadFromPEM(std::string_view pem) override;
+  std::string ToPEM() override;
+
+  auto Encrypt(std::span<const uint8_t> data)
+      -> std::optional<std::vector<uint8_t>>;
+
+  bool VerifySignature(std::span<const uint8_t> data,
+                       std::span<const uint8_t> signature);
+
+  void TakeOwnership(EVP_PKEY*& public_key);
+};
 
 }  // namespace crypto
 }  // namespace keyx

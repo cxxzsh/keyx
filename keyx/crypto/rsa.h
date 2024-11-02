@@ -16,10 +16,14 @@
 
 #pragma once
 
-namespace keyx{
-namespace crypto{
+namespace keyx {
+namespace crypto {
 
-class RSA {};
+class RSA {
+ public:
+  bool Encrypt();
+  bool Decrypt();
+};
 
-}
-}
+}  // namespace crypto
+}  // namespace keyx

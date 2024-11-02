@@ -16,18 +16,28 @@
 
 #pragma once
 
-#include "keyx/signature/signature.h"
+#include <string>
+#include <string_view>
+
+#include "keyx/global.h"
+#include "keyx/macros.h"
 
 namespace keyx {
 
-namespace license {
 class License {
  public:
+  License() = default;
+  License(const License& other);
+  License& operator=(License other);
+
+  bool Load(std::string_view file_path);
   bool Verify();
 
  private:
-  signature::Signature signature_;
+  DEFINE_PROPERTY(std::string, id, "")
+  DEFINE_PROPERTY(std::string, issue_date, "")
+  DEFINE_PROPERTY(std::string, expiry_date, "")
+  DEFINE_PROPERTY(std::string, additional_payload, "")
 };
 
-}  // namespace license
 }  // namespace keyx

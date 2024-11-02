@@ -25,15 +25,15 @@ set(LIB_NAME "keyx")
 set(keyx_library_HEADERS 
     "include/keyx/license.h"
     "include/keyx/export.h"
-
+	
     "keyx/crypto/base64.h" 
+	"keyx/crypto/key.h"
     "keyx/crypto/private_key.h"
     "keyx/crypto/public_key.h"
     "keyx/crypto/rsa.h"
     "keyx/license/license_infomation.h"
     "keyx/signature/signature.h"
     "keyx/global.h"
-    "keyx/key.h"
 )
 
 set(keyx_library_SOURCES

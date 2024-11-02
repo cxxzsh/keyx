@@ -18,4 +18,8 @@
 
 #include <filesystem>
 
-namespace sfs = std::filesystem;
+namespace fs = std::filesystem;
+
+#define DISABLE_COPY_AND_ASSIGN(ClassName) \
+  ClassName(const ClassName&) = delete;    \
+  ClassName& operator=(const ClassName&) = delete;

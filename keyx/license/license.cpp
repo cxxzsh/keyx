@@ -13,7 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
- #include "keyx/license.h"
 
-bool keyx::license::License::Verify() { return false; }
+#include "keyx/license.h"
+
+#include <nlohmann/json.hpp>
+
+namespace keyx {
+
+License::License(const License& other) {
+  id_ = other.id_;
+  issue_date_ = other.issue_date_;
+  expiry_date_ = other.expiry_date_;
+  additional_payload_ = other.additional_payload_;
+}
+
+License& License::operator=(License other) {
+  std::swap(id_, other.id_);
+  std::swap(issue_date_, other.issue_date_);
+  std::swap(additional_payload_, other.additional_payload_);
+
+  return *this;
+}
+
+bool License::Load(std::string_view file_path) {
+  fs::path path;
+
+  return false;
+}
+
+bool License::Verify() { return false; }
+
+}  // namespace keyx

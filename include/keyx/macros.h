@@ -16,14 +16,10 @@
 
 #pragma once
 
-#include "keyx/global.h"
-
-namespace keyx {
-
-class Key {
- public:
-  virtual bool load(const sfs::path& src_path) = 0;
-  virtual bool save(const sfs::path& dst_path) = 0;
-};
-
-}  // namespace keyx
+#define DEFINE_PROPERTY(type, name, init_value) \
+ private:                                       \
+  type name##_ = init_value;                    \
+                                                \
+ public:                                        \
+  type get_##name() const { return name##_; }    \
+  void set_##name(type value) { name##_ = value; }
