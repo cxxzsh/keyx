@@ -32,7 +32,6 @@ set(keyx_library_HEADERS
     "keyx/crypto/public_key.h"
     "keyx/crypto/rsa.h"
     "keyx/license/license_infomation.h"
-    "keyx/signature/signature.h"
     "keyx/global.h"
 )
 
@@ -42,7 +41,6 @@ set(keyx_library_SOURCES
     "keyx/crypto/public_key.cpp"
     "keyx/crypto/rsa.cpp"
     "keyx/license/license.cpp"
-    "keyx/signature/signature.cpp"
 )
 
 add_library(${LIB_NAME}
@@ -55,6 +53,10 @@ target_link_libraries(${LIB_NAME} PRIVATE
     OpenSSL::Crypto
     nlohmann_json::nlohmann_json
 )
+
+if(WIN32)
+target_compile_options(${LIB_NAME} PRIVATE /EHsc)
+endif()
 
 if (KEYX_BUILD_TESTS)
 enable_testing()
